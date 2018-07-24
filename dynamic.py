@@ -74,6 +74,7 @@ def package():
     print "------------------------"
     print table_class
 
+
 def FindGreatestSum(array):
     #找出一维数组最大序列的和
     dp = array[:]
