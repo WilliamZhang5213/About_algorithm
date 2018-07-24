@@ -48,7 +48,7 @@ def midorder(t):
     preorder(t.right)
     print(")", end=' ')
 
-
+#中根非递归遍历
 def midorder_norec(t):
     s = [] 
     while t is not None or s != []:
