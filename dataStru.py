@@ -1,4 +1,4 @@
-
+#--coding:utf-8
 #linked list
 class Node(object):  
     """
