@@ -458,8 +458,71 @@ def GetNumberOfK(data, k):
     return s
 
 
+#层次遍历
+def levelOrder(r):
+    #输入一颗二叉树，求树的深度
+    if r is None:
+        return 0
+    count = 0
+    q = [] #模拟一个队列储存结点
+    q.append(r)
+    while len(q) != 0:
+        tmp = [] #使用列表储存同层结点
+        for i in range(len(q)):
+            t = q.pop(0)
+            if t.left is not None:
+                q.append(t.left)
+            if t.right is not None:
+                q.append(t.right)
+            tmp.append(t.data)
+        if tmp:
+            count += 1
+  
+    return count
+
+
+def FindFirstCommonNode(head1, head2):
+    #两个链表的第一个公共结点
+    if head1 is None or head2 is None:
+        return None
+
+    L1 = []
+    L2 = []
+    while head1:
+        L1.append(head1.data)
+        head1 = head1.next
+    while head2:
+        L2.append(head2.data)
+        head2 = head2.next
+    
+    f = None
+    while L1 and L2:
+        top1 = L1.pop(-1)
+        top2 = L2.pop(-1)
+        if top1 == top2:
+            f = top1
+        else:
+            break
+    
+    return f
+
+
 if __name__ == "__main__":
-    print GetNumberOfK([12,3,13], 1)
+    
+    L1 = ds.ListNode()
+    for i in [1, 3, 8, 5, 2]:
+        L1.add(i)        
+    # L1.print_ListNode()
+
+    L2 = ds.ListNode()
+    for i in [8, 5, 2]:
+        L2.add(i)        
+    # L2.print_ListNode()
+
+    print(FindFirstCommonNode(L1.head, L2.head))
+
+    
+    # print GetNumberOfK([12,3,13], 1)
 
     # print(FindGreatestSum([6,-3,-2,7,-15,1,2,2]))
     
@@ -479,6 +542,9 @@ if __name__ == "__main__":
     
     # print(FindPath(base, 19))
     
+
+
+
     # #1
     # print("Duplicate number is:", duplicate([2,5,1,0,3,5]))
 
