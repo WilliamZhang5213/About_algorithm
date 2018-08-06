@@ -678,17 +678,81 @@ def levelOrder(r):
                 q.append(t.left)
             if t.right is not None:
                 q.append(t.right)
-            tmp.append(t.data)
+            tmp.append(t.val)
         if tmp:
             count += 1
   
     return count
 
-#39.平衡二叉树
+def IsBalanced_Solution(pRoot):
+    #39.平衡二叉树
+    if not pRoot:
+        return True
+    if abs(levelOrder(pRoot.left) - levelOrder(pRoot.right)) > 1:
+        return False
+    return IsBalanced_Solution(pRoot.left) and IsBalanced_Solution(pRoot.right)
+
+t = TreeNode(1)
+t.right = TreeNode(2)
+t.right.right = TreeNode(3)
+print IsBalanced_Solution(t)
+
 #40.数组中只出现一次的数字
-#41.和为S的连续正数序列
+    
+def FindContinuousSequence(tsum):
+#41.和为S的连续正数序列, 双指针思路，其中cur = (a1 + an)*n/2是根据等差数列求和来的，n = an - a1 + 1
+    allres = []
+    low = 1
+    high = 2
+    while low < high:
+        cur = (low + high) * (high - low + 1)/2
+        if cur < tsum:
+            high += 1
+        
+        if cur == tsum:
+            res = []
+            for i in range(low, high + 1):
+                res.append(i)
+            allres.append(res)
+            low += 1
+        
+        if cur > tsum:
+            low += 1
+        
+    return allres
+
+            
+
+def FindNumbersWithSum(array, tsum):
 #42.和为S的两个数字
+    allres = []
+
+    for i in array:
+        res = []
+        if tsum - i in array:
+            if tsum - i == i:
+                return [i, i]
+            else:
+                return [i, tsum - i]
+    
+    return
+
+
+def LeftRotateString(s, n):
 #43.左旋转字符串
+    if not s:
+        return ""
+    cache = ""
+    for i in range(n):
+        c = s[i]
+        cache += c
+    return s[n:] + cache
+
+# print LeftRotateString('', 6)
+
+def ReverseSentence(s):
+    #44.翻转单词顺序
+    
 
 
 def movingCount(threshold, rows, cols):
